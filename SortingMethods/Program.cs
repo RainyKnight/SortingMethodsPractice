@@ -33,14 +33,14 @@ namespace SortingMethods
         static int upperBound = 100;
 
         // private variables
-        private int[] nums = new int[length];
+        private int[] nums = { 2, 5, 8 };
 
         // constructor
         public NumList()
         {
-            nums[0] = 2;
-            nums[1] = 6;
-            nums[3] = 10;
+            //nums[0] = 2;
+            //nums[1] = 6;
+            //nums[3] = 10;
             //this.randomize();
         }
 
@@ -101,7 +101,7 @@ namespace SortingMethods
                 return true;
             else
             {
-                if (nums[i-1] < nums[i])                // TODO i+1 is a problem
+                if (nums[i-1] < nums[i])
                 {
                     i++;
 
@@ -111,7 +111,7 @@ namespace SortingMethods
                 // return false if end isn't reached
                 return false;
             }
-        }
+        } // it's jumping up to traverse(i)...
 
 
 
