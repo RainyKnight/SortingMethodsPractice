@@ -16,11 +16,14 @@ namespace SortingMethods
             {
                 NumList.sortCheck();
                 NumList.print();
-                //NumList.randomize();
-
-
-
                 Console.ReadLine();
+
+                NumList.randomize();
+
+                //NumList.bubbleSort();
+                //NumList.sortCheck();
+                //NumList.print();
+                //Console.ReadLine();
             }
         }
     }
@@ -28,20 +31,17 @@ namespace SortingMethods
     class NumList
     {
         // settings
-        static int length = 3;
+        static int length = 7;
         static int lowerBound = 0;
         static int upperBound = 100;
 
         // private variables
-        private int[] nums = { 2, 5, 8 };
+        private int[] nums = new int[length];
 
         // constructor
         public NumList()
         {
-            //nums[0] = 2;
-            //nums[1] = 6;
-            //nums[3] = 10;
-            //this.randomize();
+            this.randomize();
         }
 
         // array mixer
@@ -75,50 +75,36 @@ namespace SortingMethods
             Console.WriteLine("--------------------------");
         }
 
-        // sort checker TODO Borken :/
+        // sort checker
         public void sortCheck()
         {
-            if (traverse(1) == true )
-            {
-                br();
-                Console.WriteLine("Sorted!");
-                br();
-            }
-            else
-            {
-                br();
-                Console.WriteLine("Not Sorted :(");
-                br();
-
-            }
+            if (traverse(nums.Length, nums) == true)
+                Console.WriteLine("SORTED");
+            if (traverse(nums.Length, nums) == false)
+                Console.WriteLine("NOT SORTED");
         }
 
-        // to be used in sortCheck()
-        public bool traverse(int i)
+        private bool traverse(int arraySize, int[] array)
         {
-            // return true if end is reached
-            if ( i == nums.Length)
+            // base case
+            // if the array has at most 1 element
+            if (arraySize <= 1)
                 return true;
-            else
-            {
-                if (nums[i-1] < nums[i])
-                {
-                    i++;
 
-                    // recursion
-                    traverse(i);
-                }
-                // return false if end isn't reached
-                return false;
-            }
-        } // it's jumping up to traverse(i)...
+            // recursive case
+            // compare the last element to the one before it
+            if (array[arraySize - 1] >= array[arraySize - 2])
+                return traverse(arraySize - 1, array);
 
+            return false;
+        }
 
 
         // --------------------------------------------
-        //sorts below
+        // different sorts below
         // --------------------------------------------
 
+        // TODO
         public void bubbleSort()
         {
             int temp;
@@ -144,14 +130,12 @@ namespace SortingMethods
             // TODO BucketSort algorithm
         }
 
+        // TODO needs to randomize WITH the numbers in it.
         public void bogoSort()
         {
             // if not sorted, randomize.
-            if (traverse(0) == false)
-            {
-                randomize();
-                bogoSort();
-            }
+            while (traverse(nums.Length, nums) != true)
+                this.randomize();
         }
 
         public void countingSort()
