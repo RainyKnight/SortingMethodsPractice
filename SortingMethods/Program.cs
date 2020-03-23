@@ -18,12 +18,13 @@ namespace SortingMethods
                 NumList.print();
                 Console.ReadLine();
 
-                NumList.randomize();
+                //NumList.randomize();
 
-                //NumList.bubbleSort();
-                //NumList.sortCheck();
-                //NumList.print();
-                //Console.ReadLine();
+                Console.WriteLine("BOGO");
+                NumList.bogoSort();
+                NumList.sortCheck();
+                NumList.print();
+                Console.ReadLine();
             }
         }
     }
@@ -31,12 +32,14 @@ namespace SortingMethods
     class NumList
     {
         // settings
-        static int length = 7;
-        static int lowerBound = 0;
+        static int length = 10;
+        static int lowerBound = 1;
         static int upperBound = 100;
 
         // private variables
         private int[] nums = new int[length];
+        private Random rand = new Random();
+
 
         // constructor
         public NumList()
@@ -47,15 +50,10 @@ namespace SortingMethods
         // array mixer
         public void randomize()
         {
-            Random rand = new Random();
-
             for (int i = 0; i < nums.Length; i++)
-            {
                 nums[i] = rand.Next(lowerBound, upperBound);
-            }
         }
 
-        // print
         public void print()
         {
             Console.Write("[");
@@ -75,7 +73,6 @@ namespace SortingMethods
             Console.WriteLine("--------------------------");
         }
 
-        // sort checker
         public void sortCheck()
         {
             if (traverse(nums.Length, nums) == true)
@@ -98,7 +95,6 @@ namespace SortingMethods
 
             return false;
         }
-
 
         // --------------------------------------------
         // different sorts below
@@ -125,54 +121,99 @@ namespace SortingMethods
             }
         }
 
+        // TODO
         public void bucketSort()
         {
             // TODO BucketSort algorithm
         }
 
-        // TODO needs to randomize WITH the numbers in it.
         public void bogoSort()
         {
-            // if not sorted, randomize.
+            int iterations = 0;
+
+            // checks if the iteration is sorted
             while (traverse(nums.Length, nums) != true)
-                this.randomize();
+            {
+                // temporary array to rearrange variables
+                int[] tempArray = new int[nums.Length];
+                int tempVar = 0;
+
+                // fill each slot in the array from 0 -> nums.Length
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    // repeats until slot is filled
+                    while (tempArray[i] == 0)
+                    {
+                        // randomizes which slot
+                        tempVar = rand.Next(0, nums.Length);
+
+                        if (nums[tempVar] != -1)
+                        {
+                            // move random variable into the new array
+                            tempArray[i] = nums[tempVar];
+
+                            // remove old slot from the pool of choices
+                            nums[tempVar] = -1;
+                        }
+                    }
+                }
+
+                // point to new array
+                nums = tempArray;
+
+                // !!Only print if you want to watch it compute!!
+                //print();
+
+                iterations++;
+            }
+            br();
+            Console.WriteLine("Completed after: {0} iterations", iterations);
+            br();
         }
 
+        // TODO
         public void countingSort()
         {
             // TODO CountingSort algorithm
         }
 
+        // TODO
         public void heapSort()
         {
             // TODO HeapSort algorithm
         }
 
+        // TODO
         public void insertionSort()
         {
             // TODO InsertionSort algorithm
         }
 
+        // TODO
         public void mergeSort()
         {
             // TODO MergeSort algorithm
         }
 
+        // TODO
         public void radixSort()
         {
             // TODO RadixSort algorithm
         }
 
+        // TODO
         public void selectionSort()
         {
             // TODO SelectionSort algorithm
         }
 
+        // TODO
         public void shellSort()
         {
             // TODO ShellSort algorithm
         }
 
+        // TODO
         public void quickSort()
         {
             // TODO QuickSort algorithm
