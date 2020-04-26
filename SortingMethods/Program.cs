@@ -16,15 +16,23 @@ namespace SortingMethods
             {
                 NumList.sortCheck();
                 NumList.print();
-                Console.ReadLine();
 
-                //NumList.randomize();
-
-                Console.WriteLine("BOGO");
-                NumList.bogoSort();
+                Console.WriteLine("Bubble");
+                NumList.bubbleSort();
                 NumList.sortCheck();
                 NumList.print();
+                NumList.br();
                 Console.ReadLine();
+                Console.Clear();
+
+                NumList.randomize();
+
+
+                //Console.WriteLine("BOGO");
+                //NumList.bogoSort();
+                //NumList.sortCheck();
+                //NumList.print();
+                //Console.ReadLine();
             }
         }
     }
@@ -68,7 +76,7 @@ namespace SortingMethods
         }
 
         // to break up output
-        static void br()
+        public void br()
         {
             Console.WriteLine("--------------------------");
         }
@@ -100,7 +108,6 @@ namespace SortingMethods
         // different sorts below
         // --------------------------------------------
 
-        // TODO
         public void bubbleSort()
         {
             int temp;
@@ -111,11 +118,11 @@ namespace SortingMethods
                 // to move the values to their spot
                 for (int i = 1; i < nums.Length-1; i++)
                 {
-                    if (nums[i-1] > nums[i])          // TODO i+1 is a problem
+                    if (nums[i-1] > nums[i])          
                     {
-                        temp = nums[i];
-                        nums[i-1] = nums[i];          // TODO i+1 is a problem
-                        nums[i + 1] = temp;
+                        temp = nums[i-1];
+                        nums[i-1] = nums[i];
+                        nums[i] = temp;
                     }
                 }
             }
